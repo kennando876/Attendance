@@ -7,14 +7,25 @@
 
         if(isset($_POST['submit'])){
             //extract values from the $_POST array
-            $fname = $_POST['firstname'];
-            $lname = $_POST['lastname'];
-            $dob = $_POST['dob'];
-            $email = $_POST['email'];
-            $contact = $_POST['phone'];
-            $specialty = $_POST['specialty']; 
+            $fname = $_POST["firstname"];
+            $lname = $_POST["lastname"];
+            $dob = $_POST["datepicker"];
+            $email = $_POST["email"];
+            $contact = $_POST["contactnum"];
+            $specialty = $_POST["specialty"]; 
+
+        $orig_file = $_FILES["avatar"]["tmp_name"];
+       $ext = pathinfo($_FILES["avatar"]["name"], PATHINFO_EXTENSION);
+            $target_dir = 'uploads/';
+         // $destination = $target_dir . basename($_FILES["avatar"]["name"]); 
+            $destination = "$target_dir$contact.$ext";  
+
+            move_uploaded_file($orig_file,$destination);
+
+           // exit();
+
             //call function to insert and track if success or not
-            $isSuccess = $crud->insertAttendees($fname, $lname, $dob, $email, $contact,$specialty);    
+            $isSuccess = $crud->insertAttendees($fname, $lname, $dob, $email, $contact, $specialty, $destination);    
             $specialtyName = $crud->getSpecialtyById($specialty);
 
             if($isSuccess){
@@ -50,7 +61,8 @@
              
             </div>
         </div>  -->
-        
+        <img src="<?php echo empty($result['avatar_path']) ? "uploads/7898787.jpg" : $result['avatar_path'];?>"
+    class="rounded-circle" style="width : 12%; height : 12%;  " />
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">
@@ -60,13 +72,13 @@
                     <?php echo $specialtyName['name'];  ?>   
                 </h6>
                 <p class="card-text">
-                    Date Of Birth:  <?php echo $_POST[ 'dob'];   ?>
+                    Date Of Birth:  <?php echo $_POST[ "datepicker"];   ?>
                 </p>
                 <p clss="card-text">
-                    Email Address:  <?php echo $_POST['email'];  ?>
+                    Email Address:  <?php echo $_POST["email"];  ?>
                 </p>
                 <p class="card-text">
-                    Contact Number: <?php echo $_POST['phone'];    ?>
+                    Contact Number: <?php echo $_POST["contactnum"];    ?>
                 </p>
 
             </div>

@@ -19,8 +19,7 @@ include_once 'includes/session.php'?>
     <title>Attendance - <?php echo $title ?></title>
   </head>
   <body>
-    <div class="container">  
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="index.php">IT Conference</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -36,10 +35,12 @@ include_once 'includes/session.php'?>
             ?>
                <a class="nav-item nav-link" href="login.php">login <span class="sr-only">(current)</span></a>
               <?php } else { ?>
-               <a class="nav-item nav-link" href="#"><span>Hello <?php echo $_SESSION['username'] ?>! </span> <span class="sr-only">(current)</span></a>
+               <a class="nav-item nav-link" href="#"><span>Hello Admin <?php echo $_SESSION['username'] ?>! </span> <span class="sr-only">(current)</span></a>
                <a class="nav-item nav-link" href="logout.php">logout <span class="sr-only">(current)</span></a>
             <?php } ?>
           </div>
         </div>
     </nav> 
+    <div class="container">  
+    
   <br/>
